@@ -18,7 +18,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="post in posts" :key="post.id">
+                  <tr v-for="(post, index) in posts" :key="post.id">
                     <td>{{ post.title }}</td>
                     <td>{{ post.content }}</td>
                     <td class="text-center">
@@ -27,7 +27,7 @@
                         class="btn btn-sm btn-primary"
                       >EDIT</router-link>
                       <button
-                        @click.prevent="PostDelete(post.id, index)"
+                        v-on:click="PostDelete(post.id, index)"
                         class="btn btn-sm btn-danger"
                       >HAPUS</button>
                     </td>
@@ -55,6 +55,21 @@ export default {
     this.axios.get(uri).then(response => {
       this.posts = response.data.data;
     });
+  },
+  methods: {
+    PostDelete(id, index) {
+      if (confirm("Data akan dihapus!")) {
+        let uri = `http://localhost:8000/api/posts/${id}`;
+        this.axios
+          .delete(uri)
+          .then(response => {
+            this.posts.splice(index, 1);
+          })
+          .catch(error => {
+            alert("system error!");
+          });
+      }
+    }
   }
 };
 </script>
