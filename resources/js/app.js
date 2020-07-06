@@ -14,6 +14,7 @@ Vue.use(VueAxios, axios);
 import IndexComponent from './components/posts/Index.vue';
 import CreateComponent from './components/posts/Create.vue';
 import EditComponent from './components/posts/Edit.vue';
+import Profil from './components/Profil.vue';
 
 const routes = [{
         name: 'posts',
@@ -29,6 +30,11 @@ const routes = [{
         name: 'edit',
         path: '/edit/:id',
         component: EditComponent
+    },
+    {
+        name: 'profil',
+        path: '/profil',
+        component: Profil
     }
 ];
 
@@ -37,6 +43,10 @@ const router = new VueRouter({
     routes: routes
 });
 
-const app = new Vue(Vue.util.extend({
-    router
-}, App)).$mount('#app');
+new Vue({
+    el: '#app',
+    router,
+    render: h => h(App)
+});
+
+export default {};
