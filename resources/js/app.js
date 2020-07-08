@@ -15,10 +15,16 @@ import IndexComponent from './components/posts/Index.vue';
 import CreateComponent from './components/posts/Create.vue';
 import EditComponent from './components/posts/Edit.vue';
 import Profil from './components/Profil.vue';
+import Home from './components/Home.vue';
 
 const routes = [{
-        name: 'posts',
+        name: 'home',
         path: '/',
+        component: Home
+    },
+    {
+        name: 'posts',
+        path: '/posts',
         component: IndexComponent
     },
     {
